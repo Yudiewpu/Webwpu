@@ -1,123 +1,515 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Wahana Pondok Ungu - Dashboard Laporan Keuangan</title>
     <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Gaya untuk body */
         body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+         /* Gaya untuk navbar */
+         nav {
+            background: linear-gradient(to right, #000000, #0033cc); /* Gradasi hitam ke biru */
+            color: #fff;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #555;
+            border-radius: 5px;
+        }
+
+        /* Gaya untuk header */
+        header {
+            background: linear-gradient(to right, #000000, #0033cc); /* Gradasi hitam ke biru */
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1rem 3rem; /* Menambah padding atas untuk mengakomodasi navbar */
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem; /* Memberi jarak dari navbar */
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Overlay putih semi-transparan */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-top: 3rem; /* Tambahkan jarak atas */
+}
+
+
+        /* Gaya untuk login container */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #f0f2f5;
-            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
         }
 
-        .login-container {
+        .login-box {
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             text-align: center;
         }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #333;
+        .login-box h2 {
+            font-size: 2rem;
+            color: #0033cc;
+            margin-bottom: 1.5rem;
         }
 
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        .input-group input {
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        button {
-            width: 100%;
-            padding: 10px;
+        .login-box input[type="text"]:focus,
+        .login-box input[type="password"]:focus {
+            border-color: #0033cc;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 51, 204, 0.5);
+        }
+
+        .login-box input[type="submit"] {
+            width: 80%;
+            background: #0033cc;
+            color: #fff;
+            padding: 0.75rem;
             border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .login-box input[type="submit"]:hover {
+            background: #002299;
+            transform: translateY(-3px);
         }
 
+        .login-box input[type="submit"]:active {
+            transform: scale(0.95);
+            background: #001966;
+        }
+
+        /* Gaya untuk alert */
         .alert {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            color: #fff;
-        }
-
-        .alert.success {
-            background-color: #28a745;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
         }
 
         .alert.error {
-            background-color: #dc3545;
+            background-color: #f44336;
+            color: white;
         }
 
-        .hidden {
+        .alert.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Gaya untuk halaman utama setelah login */
+        .main-container {
             display: none;
         }
+
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .login-box {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Gaya untuk main section */
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Gaya untuk form section */
+        #form-section {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 7rem; /* Tambahkan jarak atas di sini */
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #form-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #form-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0033cc;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        #form-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #form-section label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        #form-section input[type="text"],
+        #form-section input[type="number"],
+        #form-section input[type="date"],
+        #form-section select {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #form-section input[type="text"]:focus,
+        #form-section input[type="number"]:focus,
+        #form-section input[type="date"]:focus,
+        #form-section select:focus {
+            border-color: #0033cc;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 51, 204, 0.5);
+        }
+
+        #form-section input[type="submit"] {
+            background: #0033cc;
+            color: #fff;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #form-section input[type="submit"]:hover {
+            background: #002299;
+            transform: translateY(-3px);
+        }
+
+        #form-section input[type="submit"]:active {
+            transform: scale(0.95); /* Efek animasi saat tombol ditekan */
+            background: #001966; /* Ubah warna latar saat ditekan */
+        }
+
     </style>
 </head>
 <body>
+    <!-- Login Container -->
     <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+        <div class="login-box">
+            <h2>Login</h2>
+            <div id="login-alert" class="alert error"></div>
+            <form id="loginForm" onsubmit="return checkLogin();">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <nav>
+            <div class="nav-container">
+                <div class="nav-logo">Wahana Pondok Ungu</div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Beranda</a>
+                    <a href="reportrev1.html" class="nav-link">Laporan Kas</a>
+                </div>
             </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-            <div id="alert" class="alert hidden"></div>
-        </form>
+        </nav>
+
+        <main>
+            <section id="form-section">
+                <h2>Tambah Data Keuangan</h2>
+                <div id="alert" class="alert"></div> <!-- Div untuk alert -->
+                <form name="dataForm" onsubmit="return submitForm();">
+                    <label for="tanggal">Tanggal:</label>
+                    <input type="date" id="tanggal" name="tanggal" required>
+
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required onchange="updateSubCategoryOptions()">
+                        <option value="" disabled selected>Pilih Category</option>
+                        <option value="Pemasukan">Pemasukan</option>
+                        <option value="Pengeluaran">Pengeluaran</option>
+                    </select>
+
+                    <label for="subCategory">Sub Category:</label>
+                    <select id="subCategory" name="subCategory" required>
+                        <option value="" disabled selected>Pilih Sub Category</option>
+                    </select>
+
+                    <label for="nominal">Nominal:</label>
+                    <input type="number" id="nominal" name="nominal" required>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </section>
+        </main>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
+
+        function checkLogin() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const alertBox = document.getElementById('alert');
+            const alertDiv = document.getElementById('login-alert');
 
+            // Replace with your actual login logic
             if (username === 'Admin' && password === 'Admin1') {
-                window.location.href = 'form.html';
+                document.querySelector('.login-container').style.display = 'none';
+                document.querySelector('.main-container').style.display = 'block';
             } else {
-                alertBox.textContent = 'Username or Password is incorrect';
-                alertBox.classList.remove('hidden');
-                alertBox.classList.add('error');
+                alertDiv.textContent = 'Username atau Password salah!';
+                alertDiv.style.display = 'block';
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 3000); // Hide alert after 3 seconds
             }
-        });
+
+            return false; // Prevent form submission
+        }
+
+
+    function updateSubCategoryOptions() {
+        const category = document.getElementById('category').value;
+        const subCategoryElement = document.getElementById('subCategory');
+
+        if (category === 'Pemasukan') {
+            // Ganti input dengan select dan berikan enum list
+            const options = ['Iuran Kas', 'Sumbangan'];
+
+            // Buat elemen select untuk enum list
+            const selectElement = document.createElement('select');
+            selectElement.id = 'subCategory';
+            selectElement.name = 'subCategory';
+            selectElement.required = true;
+
+            // Tambahkan pilihan default
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            defaultOption.textContent = 'Pilih Sub Category';
+            selectElement.appendChild(defaultOption);
+
+            // Tambahkan opsi enum
+            options.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                selectElement.appendChild(opt);
+            });
+
+            // Ganti elemen input sebelumnya dengan select
+            subCategoryElement.replaceWith(selectElement);
+
+        } else if (category === 'Pengeluaran') {
+            // Ganti select dengan input text yang editable
+            const inputElement = document.createElement('input');
+            inputElement.type = 'text';
+            inputElement.id = 'subCategory';
+            inputElement.name = 'subCategory';
+            inputElement.required = true;
+
+            // Ganti elemen select sebelumnya dengan input
+            subCategoryElement.replaceWith(inputElement);
+        }
+    }
+
+
+        function submitForm() {
+            const form = document.forms['dataForm'];
+            const submitButton = form.querySelector('input[type="submit"]');
+            submitButton.value = 'Loading...'; // Tampilkan teks Loading...
+            submitButton.disabled = true; // Nonaktifkan tombol sementara
+
+            const tanggal = form['tanggal'].value;
+            const category = form['category'].value;
+            const subCategory = form['subCategory'].value;
+            const nominal = form['nominal'].value;
+
+            const payload = {
+                tanggal: tanggal,
+                category: category,
+                subCategory: subCategory,
+                nominal: nominal
+            };
+
+            const queryString = Object.keys(payload).map(key => key + '=' + encodeURIComponent(payload[key])).join('&');
+
+            const url = 'https://script.google.com/macros/s/AKfycbyEQSVtY0_5iFH4ArDmaogTPD0KUieIAheBUkVNXoyxoWsDLiaI-KpZzuhEHVI9Ircv/exec';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: queryString
+            })
+            .then(response => response.json())
+            .then(data => {
+                const alertDiv = document.getElementById('alert');
+                if (data.status === 'success') {
+                    alertDiv.textContent = 'Data berhasil ditambahkan!';
+                    alertDiv.className = 'alert success';
+                } else {
+                    alertDiv.textContent = 'Terjadi kesalahan: ' + data.message;
+                    alertDiv.className = 'alert error';
+                }
+                alertDiv.style.display = 'block';
+
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 3000);
+
+                // Reset form and button state
+                form.reset();
+                submitButton.value = 'Submit';
+                submitButton.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const alertDiv = document.getElementById('alert');
+                alertDiv.textContent = 'Terjadi kesalahan: ' + error.message;
+                alertDiv.className = 'alert error';
+                alertDiv.style.display = 'block';
+
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 3000);
+
+                // Reset button state
+                submitButton.value = 'Submit';
+                submitButton.disabled = false;
+            });
+
+            return false;
+        }
+
+    let timeout;
+
+    function startSessionTimer() {
+        // Set a timeout to redirect to the login page after 1 minute (60,000 milliseconds)
+        timeout = setTimeout(() => {
+            alert('Sesi telah habis. Anda akan dikembalikan ke halaman login.');
+            document.querySelector('.main-container').style.display = 'none';
+            document.querySelector('.login-container').style.display = 'flex';
+        }, 60000); // 1 minute timeout
+    }
+
+    function resetSessionTimer() {
+        // Clear the existing timeout and start a new one
+        clearTimeout(timeout);
+        startSessionTimer();
+    }
+
+    // Add event listeners to reset the session timer on user activity
+    const formSection = document.getElementById('form-section');
+    formSection.addEventListener('mousemove', resetSessionTimer);
+    formSection.addEventListener('keydown', resetSessionTimer);
+    formSection.addEventListener('click', resetSessionTimer);
+
+    // Start the session timer when the page loads
+    window.onload = startSessionTimer;
+
     </script>
 </body>
 </html>
+
