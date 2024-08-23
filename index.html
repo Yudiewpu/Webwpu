@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahana Pondok Ungu</title>
+    <style>
+        /* Reset CSS untuk menghilangkan margin dan padding default */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Gaya untuk body */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Gaya untuk navbar */
+        nav {
+            background: linear-gradient(to right, #000000, #0033cc); /* Gradasi hitam ke biru */
+            color: #fff;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #555;
+            border-radius: 5px;
+        }
+
+        /* Gaya untuk header */
+        header {
+            background: linear-gradient(to right, #000000, #0033cc); /* Gradasi hitam ke biru */
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1rem 3rem; /* Menambah padding atas untuk mengakomodasi navbar */
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem; /* Memberi jarak dari navbar */
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Overlay putih semi-transparan */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gaya untuk main section */
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Gaya untuk card container */
+        .card-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            scroll-behavior: smooth;
+            transition: transform 0.1s ease; /* Animasi saat scroll */
+        }
+
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .scroll-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .scroll-left {
+            left: 10px;
+        }
+
+        .scroll-right {
+            right: 10px;
+        }
+
+        /* Gaya untuk setiap card */
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            flex: 0 0 auto; /* Mencegah card untuk menyusut dan memastikan ukuran tetap */
+            width: 300px; /* Lebar card */
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Gaya footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Gaya scrollbar untuk browser Webkit */
+        .card-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .card-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .card-container::-webkit-scrollbar-track {
+            background: #f4f4f4;
+        }
+
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .card-container {
+                padding: 1rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">Wahana Pondok Ungu</div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <a href="reportrev1.html" class="nav-link">Laporan Kas</a>
+                <a href="login.html" class="nav-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <h1>Wahana Pondok Ungu</h1>
+        <h2>Komunitas Warga Blok M09 & M10</h2>
+    </header>
+    <main>
+        <section id="about">
+            <h2>Selamat datang di Wahana Pondok Ungu</h2>
+            <p>Kami adalah komunitas aktif dari Blok M09 dan M10 yang berdedikasi untuk menciptakan lingkungan yang harmonis dan penuh kebersamaan.</p>
+        </section>
+        <section id="features">
+            <p></p>
+            <p></p>
+            <h2>Documentasi</h2>
+            <div class="card-wrapper">
+                <button class="scroll-button scroll-left">&#10094;</button>
+                <div class="card-container">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200" alt="Card 1">
+                        <div class="card-content">
+                            <h3 class="card-title">Fitur 1</h3>
+                            <p class="card-description">Deskripsi singkat tentang fitur atau informasi penting yang terkait dengan card ini.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200" alt="Card 2">
+                        <div class="card-content">
+                            <h3 class="card-title">Fitur 2</h3>
+                            <p class="card-description">Deskripsi singkat tentang fitur atau informasi penting yang terkait dengan card ini.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200" alt="Card 3">
+                        <div class="card-content">
+                            <h3 class="card-title">Fitur 3</h3>
+                            <p class="card-description">Deskripsi singkat tentang fitur atau informasi penting yang terkait dengan card ini.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200" alt="Card 4">
+                        <div class="card-content">
+                            <h3 class="card-title">Fitur 4</h3>
+                            <p class="card-description">Deskripsi singkat tentang fitur atau informasi penting yang terkait dengan card ini.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200" alt="Card 5">
+                        <div class="card-content">
+                            <h3 class="card-title">Fitur 5</h3>
+                            <p class="card-description">Deskripsi singkat tentang fitur atau informasi penting yang terkait dengan card ini.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/300x200" alt="Card 6">
+                        <div class="card-content">
+                            <h3 class="card-title">Fitur 6</h3>
+                            <p class="card-description">Deskripsi singkat tentang fitur atau informasi penting yang terkait dengan card ini.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="scroll-button scroll-right">&#10095;</button>
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Kontak Kami</h2>
+            <p>Untuk pertanyaan atau informasi lebih lanjut, silakan hubungi kami di email <a href="mailto:info@wahanapondokungu.com">info@wahanapondokungu.com</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Wahana Pondok Ungu. Semua hak cipta dilindungi.</p>
+    </footer>
+    <script>
+        // JavaScript untuk mengatur scroll otomatis dengan tombol
+        document.querySelector('.scroll-left').addEventListener('click', function() {
+            document.querySelector('.card-container').scrollBy({
+                left: -300,
+                behavior: 'smooth'
+            });
+        });
+
+        document.querySelector('.scroll-right').addEventListener('click', function() {
+            document.querySelector('.card-container').scrollBy({
+                left: 300,
+                behavior: 'smooth'
+            });
+        });
+
+        // JavaScript untuk scroll otomatis
+        const cardContainer = document.querySelector('.card-container');
+        let scrollAmount = 0;
+        const scrollStep = 2; // Besar langkah scroll
+        const scrollInterval = 60; // Interval scroll dalam milidetik
+
+        function autoScroll() {
+            if (scrollAmount >= cardContainer.scrollWidth - cardContainer.clientWidth) {
+                cardContainer.scrollTo({
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                scrollAmount = 0;
+            } else {
+                cardContainer.scrollBy({
+                    left: scrollStep,
+                    behavior: 'smooth'
+                });
+                scrollAmount += scrollStep;
+            }
+        }
+
+        setInterval(autoScroll, scrollInterval);
+    </script>
+</body>
+</html>
