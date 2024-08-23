@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahana Pondok Ungu</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Gaya untuk body */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Gaya untuk navbar */
+        nav {
+            background: linear-gradient(to right, #000000, #0033cc); /* Gradasi hitam ke biru */
+            color: #fff;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #555;
+            border-radius: 5px;
+        }
+
+        /* Gaya untuk header */
+        header {
+            background: linear-gradient(to right, #000000, #0033cc); /* Gradasi hitam ke biru */
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1rem 3rem; /* Menambah padding atas untuk mengakomodasi navbar */
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem; /* Memberi jarak dari navbar */
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Overlay putih semi-transparan */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gaya untuk main section */
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Gaya footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Gaya scrollbar untuk browser Webkit */
+        .card-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .card-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .card-container::-webkit-scrollbar-track {
+            background: #f4f4f4;
+        }
+
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .card-container {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        .filter-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center; /* Center the filter box */
+            margin-top: 2rex;
+        }
+
+        .filter-container label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .filter-container select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none; /* Initially hidden */
+        }
+
+        .loading-content {
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            justify-content: center;
+            align-items: center; /* Center items horizontally */
+            text-align: center;
+        }
+
+        .loading-icon {
+            border: 10px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px; /* Space between icon and text */
+        }
+
+        .loading-text {
+            font-size: 18px;
+            color: #3498db;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Gaya untuk Card */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center; /* Center the cards */
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 250px; /* Set a fixed width for cards */
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            color: #004080;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Table container */
+        .table-container {
+            padding: 0 20px; /* Add padding to the left and right */
+            margin: 0 auto;  /* Center the table container */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden; /* Ensures that the border-radius applies to the entire table */
+            font-size: 1em;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Add a bottom border for rows */
+        }
+
+        th {
+            background-color: #004080;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Highlight rows on hover */
+        tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Responsiveness for smaller screens */
+        @media (max-width: 600px) {
+            .table-container {
+                padding: 0 10px; /* Reduce padding for smaller screens */
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card h3 {
+                font-size: 1rem;
+            }
+
+            .card p {
+                font-size: 1.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">Wahana Pondok Ungu</div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <a href="report.html" class="nav-link">Laporan Kas</a>
+                <a href="login.html" class="nav-link">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading icon overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-icon"></div>
+            <div class="loading-text">Sedang Mengambil Data</div>
+        </div>
+    </div>
+
+    <header>
+        <h2>Laporan Kas Blok M09 dan M10</h2>
+    </header>
+
+    <main>
+        <div class="filter-container">
+            <label for="month-filter">Bulan:</label>
+            <select id="month-filter">
+                <option value="">All</option>
+                <!-- Options for months will be added here by JavaScript -->
+            </select>
+        </div>
+
+        <!-- Container for Cards -->
+        <div id="card-container" class="card-container"></div>
+
+        <div class="table-container">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                        <th>Nominal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be appended here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Wahana Pondok Ungu. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function formatCurrencyIDR(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+        }
+
+        function formatDate(dateString) {
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            return new Date(dateString).toLocaleDateString('id-ID', options);
+        }
+
+        function populateMonthFilter(data) {
+            const monthFilter = document.getElementById('month-filter');
+            const months = new Set();
+
+            data.forEach(row => {
+                const date = new Date(row.Tanggal);
+                const monthName = date.toLocaleDateString('en-GB', { month: 'long' });
+                months.add(monthName);
+            });
+
+            months.forEach(month => {
+                const option = document.createElement('option');
+                option.value = month;
+                option.textContent = month;
+                monthFilter.appendChild(option);
+            });
+        }
+
+        function fetchData() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'flex';
+
+            fetch('https://script.google.com/macros/s/AKfycbyEQSVtY0_5iFH4ArDmaogTPD0KUieIAheBUkVNXoyxoWsDLiaI-KpZzuhEHVI9Ircv/exec')
+                .then(response => response.json())
+                .then(result => {
+                    console.log("Data received from API:", result);
+
+                    if (result.status === 'success') {
+                        let data = result.data;
+
+                        console.log("Parsed Data:", data);
+                        populateMonthFilter(data);
+
+                        const monthFilter = document.getElementById('month-filter');
+                        monthFilter.addEventListener('change', () => {
+                            const selectedMonth = monthFilter.value;
+                            updateTableAndCards(selectedMonth);
+                        });
+
+                        function updateTableAndCards(month) {
+                            let totalPemasukan = 0;
+                            let totalPengeluaran = 0;
+                            const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+
+                            tableBody.innerHTML = '';
+                            document.getElementById('card-container').innerHTML = '';
+
+                            data.forEach(row => {
+                                const date = new Date(row.Tanggal);
+                                const monthName = date.toLocaleDateString('en-GB', { month: 'long' });
+
+                                if (month === '' || month === monthName) {
+                                    const nominal = parseFloat(row.Nominal);
+                                    if (row.Category === 'Pemasukan') {
+                                        totalPemasukan += nominal;
+                                    } else if (row.Category === 'Pengeluaran') {
+                                        totalPengeluaran += nominal;
+                                    }
+
+                                    const newRow = tableBody.insertRow();
+                                    newRow.insertCell(0).textContent = formatDate(row.Tanggal);
+                                    newRow.insertCell(1).textContent = row.Category;
+                                    newRow.insertCell(2).textContent = row.SubCategory;
+                                    newRow.insertCell(3).textContent = formatCurrencyIDR(nominal);
+                                }
+                            });
+
+                            console.log("Total Pemasukan:", totalPemasukan);
+                            console.log("Total Pengeluaran:", totalPengeluaran);
+
+                            const sisaSaldo = totalPemasukan - totalPengeluaran;
+
+                            const cardContainer = document.getElementById('card-container');
+                            const createCard = (title, total) => {
+                                const card = document.createElement('div');
+                                card.className = 'card';
+                                const cardTitle = document.createElement('h3');
+                                cardTitle.textContent = title;
+                                const cardValue = document.createElement('p');
+                                cardValue.textContent = formatCurrencyIDR(total);
+                                card.appendChild(cardTitle);
+                                card.appendChild(cardValue);
+                                cardContainer.appendChild(card);
+                            };
+
+                            createCard('Total Pemasukan', totalPemasukan);
+                            createCard('Total Pengeluaran', totalPengeluaran);
+                            createCard('Sisa Saldo', sisaSaldo);
+                        }
+
+                        updateTableAndCards('');
+                    } else {
+                        console.error('Failed to retrieve data:', result.message);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error))
+                .finally(() => {
+                    loadingOverlay.style.display = 'none';
+                });
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
