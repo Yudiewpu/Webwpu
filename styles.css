@@ -119,7 +119,7 @@
 
 /* Header Styling */
 #about {
-    background-image: url('images/bg5.jpg'); /* Relative path to the background image */
+    background-image: url('bg5.jpg'); /* Relative path to the background image */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Keeps the background fixed during scrolling */
