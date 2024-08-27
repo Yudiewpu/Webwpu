@@ -1,1 +1,146 @@
+/* Set a fixed height and maintain aspect ratio for images */
+.card img, .card-img-top {
+    height: 350px; /* Adjust this height as needed */
+    width: 100%; /* Ensure the image takes up the full width of the card */
+    object-fit: cover; /* Maintain aspect ratio and cover the image area */
+}
+
+/* Ensure consistent card height across all cards */
+.card {
+    min-height: 400px; /* Set a minimum height for all cards */
+    height: 100%; /* Make sure cards fill the height of their containers */
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures consistent spacing */
+}
+
+/* Hover effect for cards */
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Visi dan Misi Card Styles */
+.visi-misi-card {
+    border: 2px solid #0066cc;
+    background-color: #e6f7ff;
+}
+/* Jarak antara judul "Visi dan Misi" dengan CardView */
+.visi-misi-section h3 {
+    margin-bottom: 30px; /* Atur jarak di bawah judul */
+}
+
+/* Alternatif: Menambahkan jarak di atas CardView */
+.visi-misi-card {
+    margin-top: 30px; /* Atur jarak di atas CardView */
+}
+
+/* Financial Overview Card Styles */
+.finance-card {
+    border: 2px solid #ff6600;
+    background-color: #fff0e6;
+    min-height: 100px; /* Atur tinggi minimum */
+    max-height: 100px; /* Atur tinggi maksimum jika diperlukan */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Memusatkan konten secara vertikal */
+    align-items: center; /* Memusatkan konten secara horizontal */
+    text-align: center; /* Memusatkan teks di dalam card */
+}
+
+/* Card Body */
+.finance-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Memusatkan teks secara vertikal */
+    align-items: center; /* Memusatkan teks secara horizontal */
+    padding: 15px;
+    text-align: center; /* Memastikan teks berada di tengah */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .finance-card {
+        min-height: 300px; /* Mengatur tinggi minimum di perangkat kecil */
+    }
+}
+
+
+/* CSS for the alert box after form submission */
+.alert-custom {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Fade-in effect */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .card {
+        margin-bottom: 20px; /* Add spacing between stacked cards */
+    }
+}
+/* Initial Transparent Navbar */
+.navbar {
+    background-color: transparent; /* Transparent background initially */
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease; /* Smooth transition for both background color and blur */
+    position: -webkit-sticky; /* Ensures compatibility with Safari */
+    position: sticky; /* Keeps the navbar at the top */
+    top: 0; /* Sticky position offset from the top */
+    z-index: 1020; /* Ensures the navbar stays above other content */
+}
+
+/* Navbar background matches header on scroll */
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background or match your header background color */
+    backdrop-filter: blur(10px); /* Optional: Add a blur effect to match the header's background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
+}
+
+/* Header Styling */
+#about {
+    background-image: url('images/bg5.jpg'); /* Relative path to the background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keeps the background fixed during scrolling */
+    color: white; /* Ensures text is readable on background */
+    padding: 80px 0; /* Adjust padding as needed */
+    text-align: center; /* Center align text */
+}
+
+#about h2 {
+    font-size: 3rem; /* Larger font size for the header */
+    margin-bottom: 30px; /* Space below the header */
+    font-weight: bold; /* Bold font */
+}
+
+/* Address Section Styling */
+.address-section p {
+    margin-bottom: 5px; /* Adjust this value to set the desired space between paragraphs */
+}
+
+/* Specific adjustment for the Address Section if you want more control */
+#address p {
+    margin-bottom: 5px; /* Adjust this value as needed */
+}
 
