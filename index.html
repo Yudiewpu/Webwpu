@@ -88,23 +88,27 @@
     </section>
     <!-- Feedback Form -->
        <section id="contact" class="py-5 fade-in">
-        <div class="container">
-            <h2 class="text-center">Kritik, Saran, dan Masukan</h2>
-            <form id="feedbackForm">
-              
-                <div class="mb-3">
-                    <label for="message" class="form-label">Pesan</label>
-                    <textarea class="form-control" id="message" rows="5" placeholder="Masukkan kritik, saran, atau masukan Anda"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Kirim</button>
-            </form>
-
-            <!-- Custom Alert -->
-            <div id="alertBox" class="alert-custom">
-                Terima kasih! Kritik dan saran Anda telah kami terima.
+    <div class="container">
+        <h2 class="text-center">Kritik, Saran, dan Masukan</h2>
+        <form id="feedbackForm">
+            <div class="mb-3">
+                <label for="date" class="form-label">Tanggal</label>
+                <input type="date" class="form-control" id="date" required>
             </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Pesan</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Masukkan kritik, saran, atau masukan Anda"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+        </form>
+
+        <!-- Custom Alert -->
+        <div id="alertBox" class="alert-custom">
+            Terima kasih! Kritik dan saran Anda telah kami terima.
         </div>
-    </section>
+    </div>
+</section>
+
 
    <!-- Address Section -->
 <section id="address" class="py-5 bg-light fade-in">
