@@ -11,7 +11,7 @@
 }
 
 .navbar-nav .nav-link {
-    color: #01010c; /* White color for the navigation links */
+    color: #030303; /* White color for the navigation links */
     margin-right: 1rem;
 }
 
@@ -29,7 +29,7 @@
 
 @media (max-width: 991.98px) {
     .navbar-nav {
-        background-color: #ffffff; /* Dark background color for the collapsed navbar */
+        background-color: #f8f9fa00; /* Dark background color for the collapsed navbar */
         padding: 1rem;
     }
 
