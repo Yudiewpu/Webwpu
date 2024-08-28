@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.getElementById('submitButton');
     const buttonText = document.getElementById('buttonText');
     const loadingSpinner = document.getElementById('loadingSpinner');
+    const alertBox = document.getElementById('alertBox');
 
     // Set default date to today
     const today = new Date().toISOString().split('T')[0];
@@ -13,11 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function checkFormValidity() {
         // Enable the submit button only if the message is filled out
-        if (messageInput.value.trim()) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
-        }
+        submitButton.disabled = !messageInput.value.trim();
     }
 
     // Initialize form validation on page load
@@ -48,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fungsi untuk menampilkan dan menyembunyikan alert
     function showAlert() {
-        const alertBox = document.getElementById('alertBox');
         alertBox.style.display = 'block';
 
         setTimeout(function() {
@@ -79,20 +75,39 @@ document.addEventListener('DOMContentLoaded', function() {
             // Tampilkan loading animasi
             showLoading();
 
-            // Simulasi pengiriman data dengan timeout (contoh)
-            setTimeout(function() {
-                // Panggil fungsi untuk menampilkan alert
-                showAlert();
+            const formData = new FormData();
+            formData.append('tanggal', dateInput.value);
+            formData.append('detail', messageInput.value);
 
-                // Sembunyikan loading animasi dan reset tombol
-                hideLoading();
+            // Kirim data ke Google Sheets menggunakan fetch
+            fetch('https://script.google.com/macros/s/AKfycbzjZDsyBmidcwN4cHSn-Xc8xtsBmL2xp_QZUfvR73RUKpBU1XR2RVsh0UE3i2GbLL8P/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Cek jika data berhasil dikirim
+                if (data.status === 'success') {
+                    // Panggil fungsi untuk menampilkan alert
+                    showAlert();
 
-                // Jangan reset tanggal, hanya reset pesan
-                messageInput.value = '';
+                    // Sembunyikan loading animasi dan reset tombol
+                    hideLoading();
 
-                // Check form validity after clearing the message
-                checkFormValidity();
-            }, 2000); // Simulate a delay (2 seconds)
+                    // Jangan reset tanggal, hanya reset pesan
+                    messageInput.value = '';
+
+                    // Check form validity after clearing the message
+                    checkFormValidity();
+                } else {
+                    // Tampilkan pesan error jika terjadi kegagalan
+                    console.error('Error:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                hideLoading(); // Sembunyikan loading meskipun terjadi error
+            });
         } else {
             // If message is empty, ensure the submit button is disabled
             submitButton.disabled = true;
@@ -108,61 +123,46 @@ document.addEventListener('DOMContentLoaded', function() {
         handleFadeInScroll();
         handleNavbarScroll();
     });
+
+    // Fungsi untuk format angka ke mata uang IDR
+    function formatCurrencyIDR(amount) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
+    }
+
+    // Fungsi untuk fetch data dari Google Sheets dan memperbarui financial cards
+    function fetchData() {
+        fetch('https://script.google.com/macros/s/AKfycbzVD5sht04smoE4-sj8NXZGSNM9RtLYYAnLcFJulTw7IL12uA6Sx7I1WVozVjmgYJT0/exec')
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    let data = result.data;
+
+                    let totalPemasukan = 0;
+                    let totalPengeluaran = 0;
+
+                    data.forEach(row => {
+                        const nominal = parseFloat(row.Nominal);
+                        if (row.Category === 'Pemasukan') {
+                            totalPemasukan += nominal;
+                        } else if (row.Category === 'Pengeluaran') {
+                            totalPengeluaran += nominal;
+                        }
+                    });
+
+                    const sisaSaldo = totalPemasukan - totalPengeluaran;
+
+                    // Memperbarui elemen HTML dengan nilai yang dihitung
+                    document.getElementById('total-pemasukan').textContent = formatCurrencyIDR(totalPemasukan);
+                    document.getElementById('total-pengeluaran').textContent = formatCurrencyIDR(totalPengeluaran);
+                    document.getElementById('sisa-saldo').textContent = formatCurrencyIDR(sisaSaldo);
+
+                } else {
+                    console.error('Failed to retrieve data:', result.message);
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Memanggil fetchData saat halaman dimuat
+    fetchData();
 });
-
-function formatCurrencyIDR(amount) {
-    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
-}
-
-function fetchData() {
-    fetch('https://script.google.com/macros/s/AKfycbzVD5sht04smoE4-sj8NXZGSNM9RtLYYAnLcFJulTw7IL12uA6Sx7I1WVozVjmgYJT0/exec')
-        .then(response => response.json())
-        .then(result => {
-            console.log('Fetch Result:', result); // Debug log
-            if (result.status === 'success') {
-                let data = result.data;
-                console.log('Fetched Data:', data); // Debug log
-
-                let totalPemasukan = 0;
-                let totalPengeluaran = 0;
-
-                data.forEach(row => {
-                    const nominal = parseFloat(row.Nominal);
-                    if (row.Category === 'Pemasukan') {
-                        totalPemasukan += nominal;
-                    } else if (row.Category === 'Pengeluaran') {
-                        totalPengeluaran += nominal;
-                    }
-                });
-
-                const sisaSaldo = totalPemasukan - totalPengeluaran;
-
-                const cardContainer = document.getElementById('card-container');
-
-                const createCard = (title, total) => {
-                    const card = document.createElement('div');
-                    card.className = 'col-md-4';
-                    card.innerHTML = `
-                        <div class="card finance-card">
-                            <div class="card-body">
-                                <h5 class="card-title">${title}</h5>
-                                <p class="card-text">${formatCurrencyIDR(total)}</p>
-                            </div>
-                        </div>
-                    `;
-                    console.log('Appending card:', title, total); // Debug log
-                    cardContainer.appendChild(card);
-                };
-
-                createCard('Pemasukan', totalPemasukan);
-                createCard('Pengeluaran', totalPengeluaran);
-                createCard('Sisa Saldo', sisaSaldo);
-
-            } else {
-                console.error('Failed to retrieve data:', result.message);
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-fetchData();
