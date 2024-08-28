@@ -1,7 +1,16 @@
-// Fade-in effect and Navbar scroll effect
 document.addEventListener('DOMContentLoaded', function() {
     const fadeElements = document.querySelectorAll('.fade-in');
     const navbar = document.querySelector('.navbar');
+    const dateInput = document.getElementById('date');
+    const messageInput = document.getElementById('message');
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    // Set default date to today
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+
+    // Disable submit button initially
+    submitButton.disabled = true;
 
     function handleFadeInScroll() {
         const scrollTop = window.scrollY;
@@ -23,6 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function checkFormValidity() {
+        // Enable the submit button only if both date and message are filled out
+        if (dateInput.value && messageInput.value.trim()) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+
+    // Check form validity on page load
+    checkFormValidity();
+
     // Initialize effects on page load
     handleFadeInScroll();
     handleNavbarScroll();
@@ -32,6 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
         handleFadeInScroll();
         handleNavbarScroll();
     });
+
+    // Add event listeners to form fields
+    dateInput.addEventListener('input', checkFormValidity);
+    messageInput.addEventListener('input', checkFormValidity);
 });
 
 // Fungsi untuk menampilkan dan menyembunyikan alert
@@ -55,8 +80,8 @@ document.getElementById('feedbackForm').addEventListener('submit', function(even
 
     // Mengosongkan formulir setelah data berhasil dikirim
     this.reset(); // Mengosongkan field formulir
+    document.querySelector('button[type="submit"]').disabled = true; // Disable the submit button again
 });
-
 
 function formatCurrencyIDR(amount) {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(amount);
@@ -114,4 +139,3 @@ function fetchData() {
 }
 
 fetchData();
-
