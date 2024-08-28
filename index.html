@@ -80,18 +80,54 @@
     </div>
 </section>
 
-<!-- Financial Overview Section -->
-<section class="py-5 fade-in">
+<!-- Financial Summary Section -->
+<section id="financial-summary" class="py-5">
     <div class="container">
-        <h3 class="text-center">Laporan Kas Bulanan</h3>
-        <div id="card-container" class="row text-center">
-            <!-- Cards will be dynamically generated here -->
+        <!-- Section Title -->
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2>Summary Kas</h2>
+            </div>
         </div>
-        <div class="text-center mt-4">
-            <a href="detaildata.html" class="btn btn-primary">Detail Data</a>
+
+        <!-- Financial Cards -->
+        <div class="row mb-4" id="financial-cards">
+            <div class="col-md-4">
+                <div class="card financial-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pemasukan</h5>
+                        <p class="card-text" id="total-pemasukan">Rp. 0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card financial-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pengeluaran</h5>
+                        <p class="card-text" id="total-pengeluaran">Rp. 0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card financial-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Sisa Saldo</h5>
+                        <p class="card-text" id="sisa-saldo">Rp. 0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Data Button -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="detaildata.html" class="btn btn-primary" id="detail-data-button">Detail Data</a>
+            </div>
         </div>
     </div>
 </section>
+
+
 
     <!-- Feedback Form -->
        <section id="contact" class="py-5 fade-in">
