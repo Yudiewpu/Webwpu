@@ -100,7 +100,11 @@
                 <label for="message" class="form-label">Pesan</label>
                 <textarea class="form-control" id="message" rows="5" placeholder="Masukkan kritik, saran, atau masukan Anda"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Kirim</button>
+           <button type="submit" class="btn btn-primary" id="submitButton">
+    <span id="buttonText">Kirim</span>
+    <span id="loadingSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+</button>
+
         </form>
 
         <!-- Custom Alert -->
