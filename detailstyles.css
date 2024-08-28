@@ -1,0 +1,153 @@
+/* Navbar styles */
+.navbar {
+    background-color: #343a40; /* Dark background color for the navbar */
+    padding: 1rem; /* Padding around the navbar */
+}
+
+.navbar-brand {
+    color: #ffffff; /* White color for the brand text */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #01010c; /* White color for the navigation links */
+    margin-right: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #080cf5; /* Change color to yellow on hover */
+}
+
+.navbar-toggler {
+    border: none; /* Remove the default border around the toggler */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* White color for the toggler icon */
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        background-color: #ffffff; /* Dark background color for the collapsed navbar */
+        padding: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        color: #0a1f97; /* White color for the collapsed navigation links */
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Financial Section Card Styles */
+.financial-card {
+    background-color: #f8f9fa; /* Light grey background */
+    border: none; /* Remove the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for the card */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+    margin-bottom: 1.5rem; /* Add margin at the bottom to space out cards */
+}
+
+.financial-card:hover {
+    transform: translateY(-10px); /* Lift the card slightly on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deepen the shadow on hover */
+}
+
+.financial-card .card-title {
+    font-size: 1.25rem; /* Increase font size for the title */
+    color: #343a40; /* Dark color for the title */
+}
+
+.financial-card .card-text {
+    font-size: 1.5rem; /* Increase font size for the text */
+    color: #28a746; /* Green color for the text */
+}
+
+/* Filter Section Styles */
+.filter-section {
+    background-color: #e9ecef; /* Light background for the filter section */
+    padding: 1rem; /* Add padding around the filter section */
+    border-radius: 5px; /* Rounded corners for the filter section */
+}
+
+.filter-section .form-label {
+    font-weight: bold; /* Bold label text */
+    color: #343a40; /* Dark color for the label text */
+}
+
+.filter-section .form-select {
+    border-radius: 5px; /* Rounded corners for the select dropdowns */
+}
+
+/* Financial Table Styles */
+.financial-table {
+    margin-top: 2rem; /* Space above the table */
+    margin-bottom: 2rem; /* Space below the table */
+    width: 100%; /* Ensure full width */
+}
+
+.financial-table th, .financial-table td {
+    text-align: center; /* Center align text in the table */
+    vertical-align: middle; /* Center align text vertically */
+}
+
+.financial-table th {
+    background-color: #343a40; /* Dark background for table headers */
+    color: #ffffff; /* White text color for headers */
+}
+
+.financial-table tbody tr:hover {
+    background-color: #f1f1f1; /* Light grey background on row hover */
+}
+
+.table-responsive {
+    overflow-x: auto; /* Enable horizontal scrolling on narrow screens */
+}
+
+/* Media Query for Narrow Screens */
+@media (max-width: 767.98px) {
+    .financial-card {
+        margin-bottom: 2rem; /* Add extra margin at the bottom on narrow screens */
+    }
+    
+    .financial-table th, .financial-table td {
+        font-size: 0.9rem; /* Slightly smaller text on narrow screens */
+    }
+}
+
+#alert-section {
+    margin-top: 20px; /* Adds spacing from the top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #058b1c;
+    color: #f8f9fa;
+    width: 40%; /* Width of the alert box */
+    margin: 20px auto; /* Center horizontally by setting left and right margins to auto */
+    padding: 15px;
+    border-radius: 5px; /* Optional: Add rounded corners for a better look */
+}
+
+
+
+.alert {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0px 4px 6px rgba(252, 250, 250, 0.1);
+}
+
+.spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.nominal-pemasukan {
+    color: blue; /* Blue text for Pemasukan */
+}
+
+.nominal-pengeluaran {
+    color: red; /* Red text for Pengeluaran */
+}
+
