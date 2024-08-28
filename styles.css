@@ -7,8 +7,6 @@
 
 /* Ensure consistent card height across all cards */
 .card {
-    min-height: 400px; /* Set a minimum height for all cards */
-    height: 100%; /* Make sure cards fill the height of their containers */
     border-radius: 10px;
     overflow: hidden;
     text-align: center;
@@ -16,62 +14,11 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensures consistent spacing */
+    justify-content: space-between;
+    margin-bottom: 10px; /* Add spacing between stacked cards */
 }
 
-/* Hover effect for cards */
-.card:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Visi dan Misi Card Styles */
-.visi-misi-card {
-    border: 2px solid #0066cc;
-    background-color: #e6f7ff;
-}
-/* Jarak antara judul "Visi dan Misi" dengan CardView */
-.visi-misi-section h3 {
-    margin-bottom: 30px; /* Atur jarak di bawah judul */
-}
-
-/* Alternatif: Menambahkan jarak di atas CardView */
-.visi-misi-card {
-    margin-top: 30px; /* Atur jarak di atas CardView */
-}
-
-/* Financial Overview Card Styles */
-.finance-card {
-    border: 2px solid #ff6600;
-    background-color: #fff0e6;
-    min-height: 100px; /* Atur tinggi minimum */
-    max-height: 100px; /* Atur tinggi maksimum jika diperlukan */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Memusatkan konten secara vertikal */
-    align-items: center; /* Memusatkan konten secara horizontal */
-    text-align: center; /* Memusatkan teks di dalam card */
-}
-
-/* Card Body */
-.finance-card .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Memusatkan teks secara vertikal */
-    align-items: center; /* Memusatkan teks secara horizontal */
-    padding: 15px;
-    text-align: center; /* Memastikan teks berada di tengah */
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
-    .finance-card {
-        min-height: 300px; /* Mengatur tinggi minimum di perangkat kecil */
-    }
-}
-
+/* Removed financial card CSS */
 
 /* CSS for the alert box after form submission */
 .alert-custom {
@@ -94,29 +41,47 @@
     opacity: 1;
 }
 
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
-    .card {
-        margin-bottom: 20px; /* Add spacing between stacked cards */
+/* Navbar styles */
+.navbar {
+    background-color: #343a40; /* Dark background color for the navbar */
+    padding: 1rem; /* Padding around the navbar */
+}
+
+.navbar-brand {
+    color: #ffffff; /* White color for the brand text */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #01010c; /* White color for the navigation links */
+    margin-right: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #080cf5; /* Change color to yellow on hover */
+}
+
+.navbar-toggler {
+    border: none; /* Remove the default border around the toggler */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* White color for the toggler icon */
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        background-color: #f8f9fa00; /* Dark background color for the collapsed navbar */
+        padding: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        color: #0a1f97; /* White color for the collapsed navigation links */
+        margin-right: 0;
+        margin-bottom: 0.5rem;
     }
 }
-/* Initial Transparent Navbar */
-.navbar {
-    background-color: transparent; /* Transparent background initially */
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease; /* Smooth transition for both background color and blur */
-    position: -webkit-sticky; /* Ensures compatibility with Safari */
-    position: sticky; /* Keeps the navbar at the top */
-    top: 0; /* Sticky position offset from the top */
-    z-index: 1020; /* Ensures the navbar stays above other content */
-}
-
-/* Navbar background matches header on scroll */
-.navbar.scrolled {
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background or match your header background color */
-    backdrop-filter: blur(10px); /* Optional: Add a blur effect to match the header's background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
-}
-
 /* Header Styling */
 #about {
     background-image: url('bg5.jpg'); /* Relative path to the background image */
@@ -135,12 +100,60 @@
 }
 
 /* Address Section Styling */
-.address-section p {
+#address p, .address-section p {
     margin-bottom: 5px; /* Adjust this value to set the desired space between paragraphs */
 }
 
-/* Specific adjustment for the Address Section if you want more control */
-#address p {
-    margin-bottom: 5px; /* Adjust this value as needed */
+/* Custom Background for the Visi dan Misi Section */
+.visi-misi-section {
+    background-color: #f1f5fe !important;
 }
 
+.main-content {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+/* Financial Section Card Styles */
+.financial-card {
+    background-color: #f8f9fa; /* Light grey background */
+    border: none; /* Remove the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for the card */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+    margin-bottom: 1.5rem; /* Add margin at the bottom to space out cards */
+}
+
+.financial-card:hover {
+    transform: translateY(-10px); /* Lift the card slightly on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deepen the shadow on hover */
+}
+
+.financial-card .card-title {
+    font-size: 1.25rem; /* Increase font size for the title */
+    color: #343a40; /* Dark color for the title */
+}
+
+.financial-card .card-text {
+    font-size: 1.5rem; /* Increase font size for the text */
+    color: #28a746; /* Green color for the text */
+}
+
+/* Filter Section Styles */
+.filter-section {
+    background-color: #e9ecef; /* Light background for the filter section */
+    padding: 1rem; /* Add padding around the filter section */
+    border-radius: 5px; /* Rounded corners for the filter section */
+}
+
+.filter-section .form-label {
+    font-weight: bold; /* Bold label text */
+    color: #343a40; /* Dark color for the label text */
+}
+
+.filter-section .form-select {
+    border-radius: 5px; /* Rounded corners for the select dropdowns */
+}
