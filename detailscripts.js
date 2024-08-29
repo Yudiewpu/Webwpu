@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
         alertSection.classList.add('d-none');
     }
 
-
     // Fetch data from the API
     function fetchData() {
         showAlert(); // Show the alert when starting to fetch data
@@ -59,12 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear existing table data
         tableBodyElement.innerHTML = '';
 
+        const filteredRows = [];
+
         data.forEach(item => {
             const date = new Date(item.Tanggal);
             const year = date.getFullYear();
             const month = date.getMonth() + 1;
             const day = date.getDate();
-            
+
             const isMonthMatch = (selectedBulan === 'all' || selectedBulan == month);
             const isCategoryMatch = (selectedCategory === 'all' || selectedCategory === item.Category.toLowerCase());
 
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     nominalCell.style.color = "red";
                 }
 
-                tableBodyElement.appendChild(row);
+                filteredRows.push(row);
 
                 if (item.Category.toLowerCase() === 'pemasukan') {
                     totalPemasukan += parseInt(item.Nominal);
@@ -95,6 +96,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Sort rows by date (latest first)
+        filteredRows.sort((a, b) => {
+            const dateA = new Date(a.querySelector('td:first-child').textContent.split('-').reverse().join('-'));
+            const dateB = new Date(b.querySelector('td:first-child').textContent.split('-').reverse().join('-'));
+            return dateB - dateA; // Sort in descending order
+        });
+
+        // Append sorted rows to the table
+        filteredRows.forEach(row => tableBodyElement.appendChild(row));
+
+        // Update total amounts
         totalPemasukanElement.textContent = `Rp. ${totalPemasukan.toLocaleString('id-ID')}`;
         totalPengeluaranElement.textContent = `Rp. ${totalPengeluaran.toLocaleString('id-ID')}`;
         sisaSaldoElement.textContent = `Rp. ${(totalPemasukan - totalPengeluaran).toLocaleString('id-ID')}`;
