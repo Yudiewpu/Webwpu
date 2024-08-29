@@ -81,36 +81,37 @@
 }
 
 /* Financial Table Styles */
+.table-responsive {
+    max-height: calc(10 * 3rem); /* Set the maximum height for 10 rows */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .financial-table {
-    margin-top: 2rem; /* Space above the table */
-    margin-bottom: 2rem; /* Space below the table */
     width: 100%; /* Ensure full width */
+    border-collapse: collapse; /* Remove gaps between borders */
 }
 
-.financial-table th, .financial-table td {
-    text-align: center; /* Center align text in the table */
-    vertical-align: middle; /* Center align text vertically */
-}
-
-.financial-table th {
-    background-color: #343a40; /* Dark background for table headers */
-    color: #ffffff; /* White text color for headers */
+.financial-table thead th {
+    position: sticky; /* Sticky positioning to freeze the header */
+    top: 0; /* Stick the header to the top */
+    z-index: 2; /* Ensure the header is above the table rows */
+    background-color: #343a40; /* Dark background for the header */
+    color: #ffffff; /* White text color */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Optional: Add a shadow for the header */
 }
 
 .financial-table tbody tr:hover {
     background-color: #f1f1f1; /* Light grey background on row hover */
 }
 
-.table-responsive {
-    overflow-x: auto; /* Enable horizontal scrolling on narrow screens */
+.financial-table th, .financial-table td {
+    text-align: center; /* Center align text in the table */
+    vertical-align: middle; /* Center align text vertically */
+    padding: 0.75rem; /* Padding around table cells */
 }
 
-/* Media Query for Narrow Screens */
 @media (max-width: 767.98px) {
-    .financial-card {
-        margin-bottom: 2rem; /* Add extra margin at the bottom on narrow screens */
-    }
-    
     .financial-table th, .financial-table td {
         font-size: 0.9rem; /* Slightly smaller text on narrow screens */
     }
@@ -266,3 +267,4 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
