@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const categorySelect = document.getElementById('category');
     const filterForm = document.getElementById('filterForm');
     const alertSection = document.getElementById('alert-section');
-    const searchButton = document.getElementById('searchButton'); // Get the search button
+    const searchButton = document.getElementById('searchButton');
 
     // Show the alert section
     function showAlert() {
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideAlert() {
         alertSection.classList.add('d-none');
     }
+
 
     // Fetch data from the API
     function fetchData() {
@@ -35,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(json => {
                 if (json.status === 'success' && Array.isArray(json.data)) {
                     filterData(json.data);
-                    hideAlert(); // Hide the alert when data is successfully fetched
                 } else {
                     console.error('Invalid data format:', json);
-                    hideAlert(); // Hide the alert even if there is an error
                 }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
-                hideAlert(); // Hide the alert if there is an error
+            })
+            .finally(() => {
+                hideAlert(); // Hide the alert even if there is an error
             });
     }
 
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 row.innerHTML = `
                     <td>${day}-${month}-${year}</td>
                     <td>${item.Category}</td>
-                    <td>${item.SubCategory}</td>
+                    <td>${item.SubCategory || ''}</td>
                     <td class="nominal">Rp. ${parseInt(item.Nominal).toLocaleString('id-ID')}</td>
                 `;
 
