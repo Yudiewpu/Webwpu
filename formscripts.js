@@ -74,7 +74,7 @@ window.addEventListener('load', function() {
     function checkSession() {
         var isLoggedIn = sessionStorage.getItem('isLoggedIn');
         var loginTime = sessionStorage.getItem('loginTime');
-        var sessionDuration = 1 * 60 * 1000; // 3 menit dalam milidetik
+        var sessionDuration = 5 * 60 * 1000; // 5 menit dalam milidetik
 
         if (!isLoggedIn || (Date.now() - loginTime > sessionDuration)) {
             // Sesi habis atau belum login, arahkan kembali ke halaman login
