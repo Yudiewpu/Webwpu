@@ -151,3 +151,118 @@
     color: red; /* Red text for Pengeluaran */
 }
 
+/* Gaya untuk seluruh section form */
+#form-input {
+    background-color: #f8f9fa; /* Warna latar belakang form */
+    padding: 40px; /* Jarak dalam dari tepi form */
+    border-radius: 8px; /* Sudut melengkung */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+/* Gaya untuk judul form */
+#form-input h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #343a40; /* Warna teks judul */
+    margin-bottom: 20px;
+}
+
+/* Gaya untuk label form */
+#form-input .form-label {
+    font-weight: 500;
+    color: #495057; /* Warna teks label */
+    margin-bottom: 5px;
+}
+
+/* Gaya untuk input form */
+#form-input .form-control {
+    border: 1px solid #ced4da; /* Warna border input */
+    border-radius: 4px; /* Sudut melengkung pada input */
+    padding: 10px;
+    font-size: 16px;
+    color: #495057; /* Warna teks dalam input */
+}
+
+/* Gaya untuk select input */
+#form-input .form-select {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    color: #495057;
+}
+
+/* Gaya untuk tombol submit */
+#form-input .btn-primary {
+    background-color: #007bff; /* Warna latar belakang tombol */
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff; /* Warna teks tombol */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Gaya tombol saat hover */
+#form-input .btn-primary:hover {
+    background-color: #0056b3; /* Warna saat tombol di-hover */
+}
+
+/* Tambahan margin bawah pada setiap elemen input */
+#form-input .mb-3 {
+    margin-bottom: 20px;
+}
+
+/* Gaya untuk tombol submit */
+#form-input .btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Animasi saat tombol di-klik */
+#form-input .btn-primary:active {
+    transform: scale(0.95); /* Mengurangi ukuran tombol sedikit saat di-klik */
+    background-color: #0056b3;
+}
+
+/* Animasi loading pada tombol */
+#form-input .btn-primary.loading {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+#form-input .btn-primary.loading:after {
+    content: ' Mengirim...';
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Gaya untuk alert sukses */
+.alert-success {
+    display: none; /* Tidak ditampilkan secara default */
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #d4edda;
+    background-color: #d4edda;
+    color: #155724;
+    border-radius: 4px;
+    font-size: 16px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
